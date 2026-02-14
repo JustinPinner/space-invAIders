@@ -1,0 +1,49 @@
+{
+    "name": "space-invaders-game",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "build:gh-pages": "npm run build && cp dist/public/index.html dist/index.html",
+        "preview": "vite preview",
+        "deploy": "npm run build:gh-pages && gh-pages -d dist",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "test:e2e": "playwright test",
+        "lint": "eslint src --ext .ts",
+        "lint:fix": "eslint src --ext .ts --fix",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "howler": "^2.2.4",
+        "phaser": "^3.90.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.12",
+        "@types/node": "^20.11.24",
+        "@typescript-eslint/eslint-plugin": "^7.0.0",
+        "@typescript-eslint/parser": "^7.0.0",
+        "eslint": "^8.56.0",
+        "gh-pages": "^6.3.0",
+        "jest": "^29.7.0",
+        "jest-canvas-mock": "^2.5.2",
+        "jsdom": "^24.0.0",
+        "playwright": "^1.44.0",
+        "prettier": "^3.2.5",
+        "ts-jest": "^29.1.2",
+        "typescript": "^5.3.3",
+        "vite": "^5.3.4"
+    },
+    "description": "",
+    "main": ".eslintrc.js",
+    "directories": {
+        "doc": "docs",
+        "test": "tests"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

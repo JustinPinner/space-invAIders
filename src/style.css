@@ -1,0 +1,82 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-canvas {
+    display: block;
+    background-color: #000;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 20px #0f0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+/* Loading screen */
+#loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0f0;
+    font-size: 24px;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Game over screen */
+.game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f00;
+    font-size: 32px;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Victory screen */
+.victory {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff0;
+    font-size: 32px;
+    text-align: center;
+    z-index: 1000;
+}
+
+/* Responsive design */
+@media (max-width: 800px) {
+    body {
+        padding: 10px;
+    }
+
+    #game-canvas {
+        border-width: 1px;
+        box-shadow: 0 0 10px #0f0;
+    }
+}
+
+/* Hide elements by default */
+.hidden {
+    display: none !important;
+}
