@@ -12,13 +12,12 @@ export default defineConfig({
         outDir: 'dist',
         rollupOptions: {
             input: {
-                main: resolve(__dirname, 'public/index.html'),
+                main: resolve(__dirname, 'index.html'),
             },
         },
     },
     optimizeDeps: {
         include: ['phaser'],
     },
-    // For GitHub Pages deployment
-    base: process.env.NODE_ENV === 'production' ? '/space-invaders/' : '/',
+    base: '/',
 });
