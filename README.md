@@ -221,6 +221,10 @@ In all this took about six or seven cycles of play, debug, fix, play again until
 
 I had done it! No, _it_ had done it! We had done it? Actually, had I really done anything? Other than talk about things to the machine, no. Had I _made_ this game? Also no. Was I proud of and/or pleased with it? Yes. But why? I have no right to be. I had practically no technical input beyond a couple of early decisions and some human testing at the end. It's a weird feeling.
 
+### Play It! ###
+
+It's deployed to Huthub pages. [Give it a try](https://justinpinner.github.io/space-invAIders/).
+
 ### Wrapping Up ###
 
 The big take away from this for me was that, with very little real effort, a reasonably clear idea of a problem definition, and the ability to describe it clearly enough in words it could understand, I outsourced this project to an AI and paid it very little attention for the 80% phase of the development cycle while I got on with other things. I only had to return focus for half an hour or so at the end to interactively work through the debugging phase.
