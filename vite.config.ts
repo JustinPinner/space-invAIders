@@ -19,5 +19,5 @@ export default defineConfig({
     optimizeDeps: {
         include: ['phaser'],
     },
-    base: '/',
+    base: process.env.VITE_BASE_PATH || '/',
 });
