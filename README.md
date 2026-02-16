@@ -1,5 +1,7 @@
 # Space InvAIders
 
+<img width="1144" height="660" alt="Screenshot 2026-02-16 at 10-35-35 Space InvAIders" src="https://github.com/user-attachments/assets/e407513a-e1f8-4be3-88dd-88792a6649d8" />
+
 "I" made a game with AI, and to be honest, I'm not sure how I feel about that. 
 
 ## !CAUTION! ##
