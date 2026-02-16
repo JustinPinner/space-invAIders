@@ -12,7 +12,9 @@ In addition, all this was done in an Ubuntu KVM (Kernel-based Virtual Machine) i
 
 Using a combination of [github spec-kit](https://github.com/github/spec-kit) and [opencode](https://opencode.ai/) I created this Space Invaders style game to learn how the process works.
 
-The resulting game is not only an acceptable rapid prototype take on the original, it was created end-to-end without me writing, or even touching a single line of code. For FREE. The Cautionary note above is important, please don't skip over it.
+The resulting game is not only an acceptable rapid prototype take on the original, it was created end-to-end without me writing, or even touching a single line of code. For FREE. 
+
+The Cautionary note above is important, please don't skip over it.
 
 It's probably worth noting that I haven't played the real Space Invaders game in quite a long time and that I can't recall exactly how the aliens stack up, or how the UFOs perform, or whether there are even bonus UFOs at the end of each level. But the result is pretty much exactly as I described it to the AI.
 
@@ -30,13 +32,13 @@ I created a new directory for the project, and followed the [opencode instructio
 
 ### Constitution ###
 
-So, once everything was installed and I'd started up the opencode environment (I'm using the Big Pickle model in zen mode throughout this exercise), I began by following spec-kit's [Establish project principles](https://github.com/github/spec-kit?tab=readme-ov-file#2-establish-project-principles) step as described in the [Get Started section](https://github.com/github/spec-kit?tab=readme-ov-file#-get-started). This was a straight up copy and paste into opencode to see if it was working:
+So, once everything was installed and I'd started up the opencode environment (I'm using the Big Pickle model in zen mode throughout this exercise - and no, I don't really know what that means), I began by following spec-kit's [Establish project principles](https://github.com/github/spec-kit?tab=readme-ov-file#2-establish-project-principles) step as described in the [Get Started section](https://github.com/github/spec-kit?tab=readme-ov-file#-get-started). This was a straight up copy and paste into opencode to see if it was working:
 
 `/speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements`
 
 Note that all `/speckit.<command>`s mentioned here are entered directly into the opencode text input field.
 
-In response to `/speckit.constitution` opencode created a `.specify/memory/constitution.md` file which appeared to have all the right words in it, albeit probably somewhat over-engineered for this project, particularly when talking about amendments requiring formal documentation, team approval and migration plans. However there were a few terms that appeared in here that I hadn't explicitly mentioned, suggesting it was already making itself aware of a few key points related to game performance: 
+In response to `/speckit.constitution` opencode created a `.specify/memory/constitution.md` [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/.specify/memory/constitution.md#space-invaders-constitution) file which appeared to have all the right words in it, albeit probably somewhat over-engineered for this project, particularly when talking about amendments requiring formal documentation, team approval and migration plans. However there were a few terms that appeared in here that I hadn't explicitly mentioned, suggesting it was already making itself aware of a few key points related to game performance: 
 
 ```
 Game MUST maintain consistent 60 FPS during normal gameplay. Memory usage MUST NOT exceed 256MB during operation. Asset loading MUST complete within 5 seconds. Input latency MUST be under 16ms for responsive controls. Resource cleanup MUST prevent memory leaks during extended play sessions. Performance monitoring MUST track frame drops and resource usage patterns.
@@ -46,112 +48,18 @@ Game MUST maintain consistent 60 FPS during normal gameplay. Memory usage MUST N
 
 Next, I ran the `/speckit.specify` command. This is where you describe the details of the game, in plain English, and where it really seems worthwhile to be as descriptive as possible. This is why I chose to recreate a version of Space Invaders: it's simple enough to describe in not-too-many-words (unlike this README), has simple gameplay rules and can be represented with simplistic graphics and user inputs. Also, I had some prior experience of putting together a clone of the 80s handheld classic [Astro Wars](https://github.com/JustinPinner/astrowars?tab=readme-ov-file), so I had a reasonable idea of many of the moving parts that would presumably be coming along here.
 
-Here's the text in full:
+This ends up in the `spec.md` file [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/specs/001-space-invaders-game/spec.md). 
 
-```
-Build a game with Typescript that runs in a web browser. 
-
-The game is fully contained on a single screen that can be resized with the browser. 
-
-The top part of the display will show the number of lives the player has on the left, the name of the game, Space InvAIders, in the centre and the current score on the right. 
-
-Below this area is the play field which is divided into three uneven blocks. 
-
-The topmost block allows a single UFO sprite to enter the display from the left or right, chosen randomly, and proceed towards the opposite side of the display at a constant rate where it will leave and disappear. 
-
-In the next block down we draw six rows of 8 sprites representing aliens. These are computer controlled non-player characters. 
-
-The next block down is the city. In this block we draw five rectangles evenly sized and spaced. These represent buildings. 
-
-The next block down is the lowest and is where we display the player's sprite that should resemble a cannon which points directly upwards to the top of the screen and can be moved left or right by the player. The aliens can drop bombs which will gradually destroy the buildings with each hit, or cause the player to lose a life if the cannon is hit. The player can shoot missiles upwards which can also gradually destroy the buildings, or instantly destroy the alien characters, or the UFO depending on what it hits. As soon as a bomb or missile hits something it is itself destroyed and removed from the game. Each alien is worth 100 points. The UFO is worth 200.
-
-The aliens move slowly and regularly from left to right. Three or four of them will drop bombs at a time, at random intervals. When any alien encounters the right edge of the display window they all pause, move down one row and then start moving towards the left, until any alien encounters the left edge of the display when they all stop, move down one row and begin moving right again. This repeats until the player has destroyed all the aliens or they have "landed" by destroying the buildings and reaching the player.
-
-If the player clears the screen of aliens and UFOs the display should be cleared and fully redrawn with a new set of aliens and buildings. 
-
-If the player's cannon is hit by an alien's bomb, it explodes and the player's life counter is reduced by one and a new cannon sprite is spawned below the buildings so that play can continue. If the player loses all lives the game is over and the aliens win.
-
-Each time the screen is initiated with a new collection of aliens and buildings, this is a "level". 
-
-If the player clears 20 levels, they beat the game and the aliens are vanquished.
-
-Throughout the game a UFO should be spawned at random times but at intervals not less than 30 seconds and not more than 90 seconds.
-
-If the player succeeds in destroying all the aliens, spawn a bonus UFO in the appropriate block with a points value of double the usual value.
-```
-
-Note that the only technical specification here is to `Build a game with Typescript that runs in a web browser`. Bear that in mind as we look into the specifications that are generated in response.
+Note that the only technical specification/hint here is to `Build a game with Typescript that runs in a web browser`. Bear that in mind as we look into the specifications that are generated in response.
 
 ### Plan ###
 
-Now the `/spec-kit.plan` [documentation](https://github.com/github/spec-kit?tab=readme-ov-file#4-create-a-technical-implementation-plan) says that this is where you `provide your tech stack and architecture choices`. I chose not to do that as I have already said it should be coded in TypeScript, but beyond that I was curious to see what decisions would be made by the AI. It asked me for a few pointers related to the look and feel, e.g. should it resize with the browser, should it use detailed or simplified graphics (with the option to enhance later) but not much more. This all gets written out to the `plan.md` document, and some interesting things came out of this:
+Now the `/spec-kit.plan` [documentation](https://github.com/github/spec-kit?tab=readme-ov-file#4-create-a-technical-implementation-plan) says that this is where you `provide your tech stack and architecture choices`. I chose not to do that as I have already said it should be coded in TypeScript, but beyond that I was curious to see what decisions would be made by the AI. It asked me for a few pointers related to the look and feel, e.g. should it resize with the browser, should it use detailed or simplified graphics (with the option to enhance later) but not much more. This all gets written out to the `plan.md` document [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/specs/001-space-invaders-game/plan.md), and some interesting things came out of this.
 
 ```
 Summary
 
 Build a complete Space Invaders game in TypeScript with HTML5 Canvas, featuring sprite graphics, collision detection, scoring system, multiple levels, and responsive design. The game will run in a web browser with resizable display and follow classic Space Invaders gameplay mechanics.
-
-### Documentation (this feature)
-
-specs/[###-feature]/
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
-
-### Source Code (repository root)
-
-src/
-├── core/                     # Game engine components
-│   ├── Game.ts              # Main game class
-│   ├── GameObject.ts        # Base entity class
-│   ├── Vector2.ts           # 2D math utilities
-│   └── CollisionSystem.ts   # AABB collision detection
-├── entities/                  # Game entities
-│   ├── Player.ts            # Player cannon
-│   ├── Alien.ts             # Enemy aliens
-│   ├── UFO.ts               # UFO entity  
-│   ├── Bullet.ts            # Player projectiles
-│   ├── Bomb.ts              # Enemy projectiles
-│   └── Building.ts          # City buildings
-├── systems/                  # Game systems
-│   ├── InputSystem.ts       # Keyboard controls
-│   ├── AudioSystem.ts       # Sound management
-│   ├── RenderSystem.ts      # Canvas rendering
-│   ├── PhysicsSystem.ts     # Movement and positioning
-│   └── UISystem.ts          # HUD and UI elements
-├── utils/                    # Utilities
-│   ├── SpriteRenderer.ts    # Shape-based sprite rendering
-│   ├── AssetLoader.ts       # Future image asset support
-│   └── GameConstants.ts     # Configuration constants
-├── types/                    # TypeScript interfaces
-│   └── GameTypes.ts         # Core game type definitions
-├── pools/                    # Object pooling for performance
-│   ├── BulletPool.ts        # Bullet object pool
-│   ├── BombPool.ts          # Bomb object pool
-│   └── ParticlePool.ts      # Effect particle pool
-└── main.ts                   # Application entry point
-
-tests/
-├── unit/                     # Unit tests (Jest + jest-canvas-mock)
-├── integration/              # Integration tests (Canvest)
-└── e2e/                     # End-to-end tests (Playwright)
-
-assets/
-├── audio/                    # Sound effects (future upgrade)
-└── images/                   # Image assets (future upgrade)
-
-docs/
-├── api.md                    # API documentation
-└── architecture.md          # System architecture
-
-public/
-├── index.html                # Main HTML file
-└── favicon.ico              # Site icon
-
-**Structure Decision**: Web application structure optimized for Phaser game development with clear separation of concerns between game engine, entities, systems, and utilities. Supports object pooling for performance and comprehensive testing strategy.
 ```
 
 I didn't mention Canvas specifically, but that seems like a solid choice for a browser-based game.
@@ -171,11 +79,13 @@ I didn't mention Canvas specifically, but that seems like a solid choice for a b
 **Scale/Scope**: Maximum 200 concurrent entities (48 aliens + 10 bullets + 5 bombs + 5 buildings + 1 UFO + particles)
 ```
 
-So it chose Phaser and Vite, plus gave consideration for storage and testing frameworks (recall that the constitution doc stated that everything should be test-driven, so that makes sense). But notice also the performance characteristics in terms of frames-per-second and memory, and how they play into the numbers of entities that it expects to sustain, and the test coverage it expects. Interesting stuff.
+So it chose Phaser and Vite, plus gave consideration for storage and testing frameworks (recall that the constitution doc stated that everything should be test-driven, so that makes sense). But notice also the performance characteristics in terms of frames-per-second and memory, and how they play into the numbers of entities that it expects to sustain, and the test coverage it expects. 
+
+I liked the fact that it also created a `research.md` document [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/specs/001-space-invaders-game/research.md) where it provides a summary of the thought processes behind the decisions made, and a `data-model.md` [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/specs/001-space-invaders-game/data-model.md) where it sketched out the, well, data models! This is all really interesting stuff.
 
 Then it went on to tick off the items from the constitution doc and it included some auditing of the documentation tree and the source code structure performed during the planning phase that gets added to the `plan.md` document. 
 
-Most, if not all of the documents listed here are (or will be) included in this repo, so you'll be able to read through each in depth if you wish.
+All of the documents listed here are included in this repo, so you'll be able to read through each in depth if you wish [(link)](https://github.com/JustinPinner/space-invAIders/tree/main/specs/001-space-invaders-game)
 
 ### Tasks ###
 
@@ -183,7 +93,7 @@ After planning we move on to generating a task list. This is simply telling open
 
 `/speckit.tasks`
 
-This generated a long list of things to be done (see the `tasks.md` file) and I noticed that a lot of them had been marked up as being able to run in parallel (`[P]`). In theory this is great as it should speed up the whole process, but when it came to running the implementation, I started to encounter API rate limiting which isn't surprising given that I'm trying to do this on the cheap, so I removed the `[P]` flags to try to reduce the number of concurrent requests I was generating to the API.
+This generated a long list of things to be done (see the `tasks.md` file [(link)](https://github.com/JustinPinner/space-invAIders/blob/main/specs/001-space-invaders-game/tasks.md)) and I noticed that a lot of them had been marked up as being able to run in parallel (`[P]`). In theory this is great as it should speed up the whole process, but when it came to running the implementation, I started to encounter API rate limiting which isn't surprising given that I'm trying to do this on the cheap, so I removed the `[P]` flags to try to reduce the number of concurrent requests I was generating to the API.
 
 ### Implement ###
 
