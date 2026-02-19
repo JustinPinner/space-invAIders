@@ -135,7 +135,7 @@ I had done it! No, _it_ had done it! We had done it? Actually, had I really done
 
 ### Play It! ###
 
-It's deployed to Huthub pages. [Give it a try](https://justinpinner.github.io/space-invAIders/).
+It's deployed to ~Huthub~ 🙄 Github pages. [Give it a try](https://justinpinner.github.io/space-invAIders/).
 
 ### Wrapping Up ###
 
